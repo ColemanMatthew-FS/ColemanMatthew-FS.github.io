@@ -1,0 +1,28 @@
+body {
+    font-family: Arial
+}
+h1{
+    color: slategray;
+    font-size:3em;
+}
+h2{
+    color: slategray;
+}
+h3{
+    color: slategray;
+}
+p{
+    color: black;
+}
+ul li{
+    color: darkolivegreen;
+}
+ol li{
+    color: darkolivegreen;
+}
+strong{
+    color: black;
+}
+em{
+    color: slategray;
+}
