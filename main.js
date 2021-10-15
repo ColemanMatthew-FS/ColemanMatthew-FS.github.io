@@ -36,10 +36,14 @@ while (keepPlaying){
     console.log("Watch out! If you accelerate too much, you'll pass your Never-Exceed Speed.")
     console.log("This simulates the careful balance a pilot must maintain at the edge of what their plane is capable of.")
     console.log("Try to guess how fast you can go at each altitude!")
+    let answer = prompt("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.\n\rWatch out! If you accelerate too much, you'll pass your structural limits!\n\rTry to guess how fast you can go at each altitude!\n\rDo you understand? (y/n)")
+    while (answer != "y"){
+        answer = prompt("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.\n\rWatch out! If you accelerate too much, you'll pass your structural limits!\n\rTry to guess how fast you can go at each altitude!\n\rDo you understand? (y/n)")
+    }
     for (let i = 0; i < altitudes.length; i++){
         console.log(i + " : "  + altitudes[i] + "m")
     }
-    let alt = Number(prompt("Select an altitude"))
+    let alt = Number(prompt("Select an altitude\n\r 0: 50m\n\r1: 5000m\n\r2:10000m"))
     while(isNaN(alt) || alt < 0 || alt > 2){
         alt = prompt("Select an altitude. Please type 0, 1, or 2.")
     }
@@ -62,7 +66,7 @@ while (keepPlaying){
             break;
         }
         console.log("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh");
-        let userAnswer = prompt("Would you like to accelerate? (y/n)")
+        let userAnswer = prompt("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh\n\rWould you like to accelerate? (y/n)")
         while(userAnswer != "y" && userAnswer != "n"){
             userAnswer = prompt("Please answer y or n.");
         }
@@ -75,7 +79,7 @@ while (keepPlaying){
         }
     }
     console.log("Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never-exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.");
-    let playAgain = prompt("Would you like to play again? (y/n)")
+    let playAgain = prompt("Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never-exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.\n\rWould you like to play again? (y/n)")
     while (playAgain != "y" && playAgain != "n"){
         playAgain = prompt("Please answer y or n")
     }
