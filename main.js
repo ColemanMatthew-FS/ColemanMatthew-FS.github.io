@@ -48,6 +48,7 @@ function button1Pressed(){
     button1.disabled = true
     button2.disabled = true
     button3.disabled = true
+    inputButton.style.display="block"
 }
 button2.onclick = button2Pressed
 function button2Pressed(){
@@ -57,6 +58,7 @@ function button2Pressed(){
     button1.disabled = true
     button2.disabled = true
     button3.disabled = true
+    inputButton.style.display="block"
 }
 button3.onclick = button3Pressed
 function button3Pressed(){
@@ -66,29 +68,31 @@ function button3Pressed(){
     button1.disabled = true
     button2.disabled = true
     button3.disabled = true
+    inputButton.style.display="block"
 }
 button1.innerHTML = altitudes[0].toString()
 button2.innerHTML = altitudes[1].toString()
 button3.innerHTML = altitudes[2].toString()
 let statusUpdate = document.getElementById('statusUpdate')
 let button4 = document.getElementById('myButton4')
-button4.disabled = true;
+button4.style.display="none"
 let button5 = document.getElementById('myButton5')
-button5.disabled = true;
+button5.style.display="none"
 let inputButton = document.getElementById('inputButton')
+inputButton.style.display="none"
 inputButton.onclick = inputButtonPressed
 let speed
 function inputButtonPressed(){
-    if (Number(document.getElementById('userInput').value) < .3 || Number(document.getElementById('userInput').value) > 1) {
-        statusUpdate.innerText = ("Please enter a speed between mach .3 and mach 1")
+    if (Number(document.getElementById('userInput').value) < .3 || Number(document.getElementById('userInput').value) > .9) {
+        statusUpdate.innerText = ("Please enter a speed between mach .3 and mach .9")
         return
     }
     speed = Number(document.getElementById('userInput').value)
     console.log(speed)
     statusUpdate.innerText = ("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Do you want to accelerate?")
     inputButton.disabled = true
-    button4.disabled = false
-    button5.disabled = false
+    button4.style.display="block"
+    button5.style.display="block"
 }
 button4.onclick = button4Press
 function button4Press(){
