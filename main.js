@@ -25,74 +25,107 @@
 //define speedK as speed * speedS
 //return speedK
 //The whole program is contained in a loop that runs as long as the user continues playing
-let keepPlaying = Boolean(true);
-while (keepPlaying){
-    const altitudes = [50, 5000, 10000];
-    console.log("When accelerating up to speed, you have to be conscious of both your Never Exceed Speed and your altitude.")
-    console.log("Your Never Exceed Speed is the point at which your aircraft suffers structural failure.")
-    console.log("Due to differences in air pressure at altitude, it changes depending on how high you are above sea level.")
-    console.log("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.")
-    console.log("You will accelerate by .2 mach (mach is the speed of sound at the given altitude) at a time.")
-    console.log("Watch out! If you accelerate too much, you'll pass your Never-Exceed Speed.")
-    console.log("This simulates the careful balance a pilot must maintain at the edge of what their plane is capable of.")
-    console.log("Try to guess how fast you can go at each altitude!")
-    let answer = prompt("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.\n\rWatch out! If you accelerate too much, you'll pass your structural limits!\n\rTry to guess how fast you can go at each altitude!\n\rDo you understand? (y/n)")
-    while (answer != "y"){
-        answer = prompt("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.\n\rWatch out! If you accelerate too much, you'll pass your structural limits!\n\rTry to guess how fast you can go at each altitude!\n\rDo you understand? (y/n)")
+const altitudes = [50, 5000, 10000];
+console.log("When accelerating up to speed, you have to be conscious of both your Never Exceed Speed and your altitude.")
+console.log("Your Never Exceed Speed is the point at which your aircraft suffers structural failure.")
+console.log("Due to differences in air pressure at altitude, it changes depending on how high you are above sea level.")
+console.log("This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.")
+console.log("You will accelerate by .2 mach (mach is the speed of sound at the given altitude) at a time.")
+console.log("Watch out! If you accelerate too much, you'll pass your Never-Exceed Speed.")
+console.log("This simulates the careful balance a pilot must maintain at the edge of what their plane is capable of.")
+console.log("Try to guess how fast you can go at each altitude!")
+let neverExceed;
+let button1 = document.getElementById("myButton1")
+let button2 = document.getElementById('myButton2')
+let button3 = document.getElementById('myButton3')
+let alt = Number(0)
+let currentAlt = document.getElementById('currentAlt')
+button1.onclick = button1Pressed
+function button1Pressed(){
+    alt = Number(0)
+    neverExceed = Number(1.1)
+    currentAlt.innerText = "50m"
+    button1.disabled = true
+    button2.disabled = true
+    button3.disabled = true
+}
+button2.onclick = button2Pressed
+function button2Pressed(){
+    alt = Number(1)
+    neverExceed = Number(1.6)
+    currentAlt.innerText = "5000m"
+    button1.disabled = true
+    button2.disabled = true
+    button3.disabled = true
+}
+button3.onclick = button3Pressed
+function button3Pressed(){
+    alt = Number(2)
+    neverExceed = Number(2)
+    currentAlt.innerText = "10000m"
+    button1.disabled = true
+    button2.disabled = true
+    button3.disabled = true
+}
+button1.innerHTML = altitudes[0].toString()
+button2.innerHTML = altitudes[1].toString()
+button3.innerHTML = altitudes[2].toString()
+let statusUpdate = document.getElementById('statusUpdate')
+let button4 = document.getElementById('myButton4')
+button4.disabled = true;
+let button5 = document.getElementById('myButton5')
+button5.disabled = true;
+let inputButton = document.getElementById('inputButton')
+inputButton.onclick = inputButtonPressed
+let speed
+function inputButtonPressed(){
+    if (Number(document.getElementById('userInput').value) < .3 || Number(document.getElementById('userInput').value) > 1) {
+        statusUpdate.innerText = ("Please enter a speed between mach .3 and mach 1")
+        return
     }
-    for (let i = 0; i < altitudes.length; i++){
-        console.log(i + " : "  + altitudes[i] + "m")
+    speed = Number(document.getElementById('userInput').value)
+    console.log(speed)
+    statusUpdate.innerText = ("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Do you want to accelerate?")
+    inputButton.disabled = true
+    button4.disabled = false
+    button5.disabled = false
+}
+button4.onclick = button4Press
+function button4Press(){
+    speed += .2;
+    speed = +speed.toFixed(2);
+    statusUpdate.innerText = ("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Do you want to accelerate?")
+    if (speed > neverExceed) {
+        statusFinal.innerText = ("Uh oh! You exceeded your never exceed speed of mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh by going mach " + speed + " or " + speedConversion(alt, speed) + "kmh\n\rWould you like to play again? (y/n)")
+        button4.disabled = true
+        button5.disabled = true
+        button6.style.display="block"
+        button7.style.display="block"
     }
-    let alt = Number(prompt("Select an altitude\n\r 0: 50m\n\r1: 5000m\n\r2:10000m"))
-    while(isNaN(alt) || alt < 0 || alt > 2){
-        alt = prompt("Select an altitude. Please type 0, 1, or 2.")
-    }
-    let neverExceed;
-    if (alt == 0){
-        neverExceed = Number(1.1);
-    }
-    else if (alt == 1){
-        neverExceed = Number(1.6);
-    }
-    else if (alt == 2){
-        neverExceed = Number(2);
-    }
-    let speed = Number(.7);
-    let cont = Boolean(true);
-    while (cont){
-        if (speed > neverExceed){
-            console.log("You exceeded your Never Exceed Speed of mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh by going mach " + speed + " or " + speedConversion(alt, speed) + "kmh")
-            cont = Boolean(false);
-            break;
-        }
-        console.log("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh");
-        let userAnswer = prompt("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh\n\rWould you like to accelerate? (y/n)")
-        while(userAnswer != "y" && userAnswer != "n"){
-            userAnswer = prompt("Please answer y or n.");
-        }
-        if (userAnswer == "y"){
-            speed += .2;
-            speed = +speed.toFixed(2);
-        }
-        else if (userAnswer == "n"){
-            cont = Boolean(false);
-        }
-    }
-    console.log("Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never-exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.");
-    let playAgain = prompt("Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never-exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.\n\rWould you like to play again? (y/n)")
-    while (playAgain != "y" && playAgain != "n"){
-        playAgain = prompt("Please answer y or n")
-    }
-    //If the user wants to play again, the program will loop
-    if (playAgain == "y"){
-        keepPlaying = Boolean(true);
-    }
-    //If they dont, the program will break
-    else if (playAgain == "n"){
-        console.log("Thanks for playing!");
-        keepPlaying = Boolean(false);
-        break;
-    }
+}
+button5.onclick = button5Press
+let statusFinal = document.getElementById('statusFinal')
+function button5Press(){
+    statusFinal.innerText = ("Well done! Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.\n\rWould you like to play again? (y/n)")
+    button4.disabled = true
+    button5.disabled = true
+    button6.style.display="block"
+    button7.style.display="block"
+}
+let button6 = document.getElementById("myButton6")
+button6.style.display="none"
+button6.onclick = button6Press
+function button6Press(){
+    location.reload()
+}
+let button7 = document.getElementById('myButton7')
+button7.style.display="none"
+button7.onclick = button7Press
+function button7Press(){
+    button6.disabled = true
+    button7.disabled = true
+    let thanksMessage = document.querySelector('#thanksMessage')
+    thanksMessage.innerHTML = "Thanks for playing!"
 }
 
 

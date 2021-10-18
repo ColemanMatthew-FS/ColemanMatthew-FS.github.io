@@ -5,7 +5,6 @@
     <title>Flying and Fighting: The MiG-21</title>
     <!--Connects this html page to the external stylesheet-->
     <link rel="stylesheet" href="style.css" />
-    <script src="main.js"></script>
 </head>
 <body>
 <!--banner image and header text-->
@@ -90,6 +89,34 @@ This tutorial will focus on the MiG-21Bis variant, one of the last variants to e
     <li>Number produced: 11,496</li>
 </ul>
 <hr/>
+<h2>And now, for a little game</h2>
+<p>When accelerating up to speed, you have to be conscious of both your <strong>Never Exceed Speed</strong> and your altitude.
+    Your <strong>Never Exceed Speed</strong> is the point at which your aircraft suffers structural failure.
+    Due to differences in air pressure at altitude, it changes depending on how high you are above sea level.
+    This program will prompt you for an altitude, and give you the choice to either continue accelerating or hold your current speed.
+    You will accelerate by .2 mach (mach is the speed of sound at the given altitude) at a time.
+    Watch out! If you accelerate too much, you'll pass your never exceed speed.
+    This simulates the careful balance a pilot must maintain at the edge of what their plane is capable of.
+    Try to guess how fast you can go at each altitude!</p>
+<h4 id="altSelectIntro">Please select an altitude</h4>
+<button id="myButton1">submit</button>
+<button id="myButton2">submit</button>
+<button id="myButton3">submit</button>
+</br>
+<h4>Current altitude: </h4>
+<p id="currentAlt"></p>
+<h4>Please enter your starting speed in mach</h4>
+<p>(Mach is the speed of sound. For instance, mach .8 is 80% of the speed of sound.)</p>
+<input type="text" id="userInput">
+<button id="inputButton">enter speed</button>
+<h4 id="statusUpdate"></h4>
+<button id="myButton4">Yes</button>
+<button id="myButton5">No</button>
+<h4 id="statusFinal"></h4>
+<button id="myButton6">Yes</button>
+<button id="myButton7">No</button>
+<h4 id="thanksMessage"></h4>
+<hr/>
 <h3>Sources</h3>
 <ul>
     <li>Information in this website comes in part from Chuck's Guides - DCS MiG-21Bis Guide <a href="https://www.mudspike.com/chucks-guides-dcs-mig-21bis-guide/">Link</a></li>
@@ -99,5 +126,6 @@ This tutorial will focus on the MiG-21Bis variant, one of the last variants to e
     <li>Second dogfight image by the United States Navy <a href="https://en.wikipedia.org/wiki/File:Rolling_scissors_maneuvering_with_instruction_symbols.jpg">Link</a></li>
     <li>Speed of sound at altitude taken from fighter-planes.com <a href="https://www.fighter-planes.com/jetmach1.htm">Link</a></li>
 </ul>
+<script src="main.js"></script>
 </body>
 </html>
