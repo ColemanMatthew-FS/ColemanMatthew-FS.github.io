@@ -24,7 +24,6 @@
 //declare speedK for the speed in kmh
 //define speedK as speed * speedS
 //return speedK
-//The whole program is contained in a loop that runs as long as the user continues playing
 const altitudes = [50, 5000, 10000];
 console.log("When accelerating up to speed, you have to be conscious of both your Never Exceed Speed and your altitude.")
 console.log("Your Never Exceed Speed is the point at which your aircraft suffers structural failure.")
@@ -41,6 +40,7 @@ let button3 = document.getElementById('myButton3')
 let alt = Number(0)
 let currentAlt = document.getElementById('currentAlt')
 button1.onclick = button1Pressed
+//Next 3 functions set a few variables and attributes depending on which button is pressed
 function button1Pressed(){
     alt = Number(0)
     neverExceed = Number(1.1)
@@ -82,6 +82,7 @@ let inputButton = document.getElementById('inputButton')
 inputButton.style.display="none"
 inputButton.onclick = inputButtonPressed
 let speed
+//this code runs when the user selects their starting speed
 function inputButtonPressed(){
     if (Number(document.getElementById('userInput').value) < .3 || Number(document.getElementById('userInput').value) > .9) {
         statusUpdate.innerText = ("Please enter a speed between mach .3 and mach .9")
@@ -91,9 +92,11 @@ function inputButtonPressed(){
     console.log(speed)
     statusUpdate.innerText = ("Your current speed is mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Do you want to accelerate?")
     inputButton.disabled = true
+    //the yes and no buttons appear
     button4.style.display="block"
     button5.style.display="block"
 }
+//this runs when the user decides to accelerate
 button4.onclick = button4Press
 function button4Press(){
     speed += .2;
@@ -109,19 +112,22 @@ function button4Press(){
 }
 button5.onclick = button5Press
 let statusFinal = document.getElementById('statusFinal')
+//this runs if the user decides not to accelerate
 function button5Press(){
-    statusFinal.innerText = ("Well done! Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.\n\rWould you like to play again? (y/n)")
+    statusFinal.innerText = ("Well done! Your final speed was mach " + speed + " or " + speedConversion(alt, speed) + "kmh. Your never exceed speed at this altitude was mach " + neverExceed + " or " + speedConversion(alt, neverExceed) + "kmh.\n\rWould you like to play again?")
     button4.disabled = true
     button5.disabled = true
     button6.style.display="block"
     button7.style.display="block"
 }
+//if the user decides to play again, the page is reloaded
 let button6 = document.getElementById("myButton6")
 button6.style.display="none"
 button6.onclick = button6Press
 function button6Press(){
     location.reload()
 }
+//if the user decides not to play again, the last buttons become unavailable and they get a thanks for playing message
 let button7 = document.getElementById('myButton7')
 button7.style.display="none"
 button7.onclick = button7Press
